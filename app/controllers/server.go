@@ -3,13 +3,14 @@ package controllers
 import (
 	"fmt"
 	"net/http"
-	"os"
 	"regexp"
 	"strconv"
 	"text/template"
 	"todo_app/app/models"
 	"todo_app/config"
 )
+
+const port int = 4000
 
 func generateHTML(w http.ResponseWriter, data interface{}, filenames ...string) {
 	var files []string
@@ -76,7 +77,5 @@ func StartMainServer() (err error) {
 	http.HandleFunc("/todos/update/", parseURL(todoUpdate))
 	http.HandleFunc("/todos/delete/", parseURL(todoDelete))
 
-	port := os.Getenv("PORT")
-
-	return http.ListenAndServe(":"+port, nil)
+	return http.ListenAndServe(":"+strconv.Itoa(port), nil)
 }
