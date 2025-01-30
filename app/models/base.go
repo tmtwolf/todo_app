@@ -5,11 +5,11 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"os"
 	"todo_app/config"
 
 	"github.com/google/uuid"
-	"github.com/lib/pq"
+
+	_ "github.com/lib/pq"
 )
 
 var Db *sql.DB
@@ -25,9 +25,7 @@ const (
 */
 
 func init() {
-	url := os.Getenv("POSTGRES_URL")
-	connection, _ := pq.ParseURL(url)
-	connection += "sslmode=require"
+	connection := "postgres://neondb_owner:npg_wcYxNIqGk5l1@ep-wandering-credit-a5eruf0y-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require"
 	Db, err = sql.Open(config.Config.SQLDriver, connection)
 	if err != nil {
 		log.Fatalln(err)

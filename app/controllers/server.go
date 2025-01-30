@@ -77,5 +77,6 @@ func StartMainServer() (err error) {
 	http.HandleFunc("/todos/delete/", parseURL(todoDelete))
 
 	port := os.Getenv("PORT")
+
 	return http.ListenAndServe(":"+port, nil)
 }

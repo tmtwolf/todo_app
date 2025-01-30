@@ -7,9 +7,7 @@ import (
 )
 
 func main() {
-
-	fmt.Println(models.Db, "\n------\n")
+	fmt.Println(models.Db)
 
 	controllers.StartMainServer()
-
 }
