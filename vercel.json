@@ -2,11 +2,7 @@
     "routes": [
         {
             "src": "/",
-            "dest": "/",
-            "methods": [
-                "GET",
-                "POST"
-            ]
+            "dest": "/"
         }
     ]
 }
