@@ -74,10 +74,10 @@ func StartMainServer() (err error) {
 	http.HandleFunc("/todos/delete/", parseURL(todoDelete))
 
 	port := os.Getenv("PORT")
-	log.Panicln("Port :" + port)
+	log.Println("Port :" + port)
 	if port == "" {
 		port = "4000"
-		log.Panicln("Fix_Port :" + port)
+		log.Println("Fix_Port :" + port)
 	}
 	return http.ListenAndServe(":"+port, nil)
 }
