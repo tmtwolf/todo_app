@@ -19,10 +19,19 @@ func signup(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Fatalln(err)
 		}
+
+		name := r.PostFormValue("name")
+		email := r.PostFormValue("email")
+		password := r.PostFormValue("password")
+
+		if _, err = models.GetUserByEmail(email); err == nil {
+			http.Redirect(w, r, "/login", 302)
+		}
+
 		user := models.User{
-			Name:     r.PostFormValue("name"),
-			Email:    r.PostFormValue("email"),
-			Password: r.PostFormValue("password"),
+			Name:     name,
+			Email:    email,
+			Password: password,
 		}
 
 		if err := user.CreateUser(); err != nil {
