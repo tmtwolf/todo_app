@@ -2,15 +2,15 @@ package controllers
 
 import (
 	"fmt"
+	"log"
 	"net/http"
+	"os"
 	"regexp"
 	"strconv"
 	"text/template"
 	"todo_app/app/models"
 	"todo_app/config"
 )
-
-const port int = 4000
 
 func generateHTML(w http.ResponseWriter, data interface{}, filenames ...string) {
 	var files []string
@@ -43,19 +43,15 @@ func parseURL(fn func(http.ResponseWriter, *http.Request, int)) http.HandlerFunc
 		// _/todos/edit/1
 		q := validPath.FindStringSubmatch(r.URL.Path)
 		if q == nil {
-			fmt.Println("-- ID is NotFound")
 			http.NotFound(w, r)
 			return
 		}
 
 		qi, err := strconv.Atoi(q[2]) // q[2]、インデックス番号2はIDとして受け取る
 		if err != nil {
-			fmt.Println("-- ID is NotMatch")
 			http.NotFound(w, r)
 			return
 		}
-
-		fmt.Println("-- ID is Match: ", qi)
 
 		fn(w, r, qi)
 	}
@@ -77,5 +73,11 @@ func StartMainServer() (err error) {
 	http.HandleFunc("/todos/update/", parseURL(todoUpdate))
 	http.HandleFunc("/todos/delete/", parseURL(todoDelete))
 
-	return http.ListenAndServe(":"+strconv.Itoa(port), nil)
+	port := os.Getenv("PORT")
+	log.Panicln("Port :" + port)
+	if port == "" {
+		port = "4000"
+		log.Panicln("Fix_Port :" + port)
+	}
+	return http.ListenAndServe(":"+port, nil)
 }
