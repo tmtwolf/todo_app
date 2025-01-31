@@ -39,9 +39,6 @@ func (u *User) CreateUser() (err error) {
 		Encrypt(u.Password),
 		time.Now(),
 	)
-	if err != nil {
-		log.Fatalln(err)
-	}
 
 	return err
 }
