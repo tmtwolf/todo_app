@@ -82,7 +82,7 @@ func (u *User) GetTodosByUser() (todos []Todo, err error) {
 			&todo.CreatedAt,
 		)
 		if err != nil {
-			log.Fatalln(err)
+			log.Println(err)
 		}
 
 		todos = append(todos, todo)

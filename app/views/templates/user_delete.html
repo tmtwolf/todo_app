@@ -1,0 +1,14 @@
+{{ define "content" }}
+<h1>User Delete</h1>
+<p>ユーザー: {{ .Name }} を完全に削除するにはパスワードを入力してください。<br>削除すると全てのデータが消えて二度と元に戻せません。</p>
+
+<form class="center" role="form" action="/user_delete" method="post">
+    <input type="password" name="password" class="form-control" placeholder="パスワード" required autofocus>
+    <br />
+    <button class="btn btn-lg btn-primary btn-block" type="submit">ユーザーを削除する</button>
+</form>
+
+<br />
+<p>{{ .Msg }}</p>
+
+{{ end }}

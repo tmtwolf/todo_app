@@ -1,0 +1,13 @@
+{{ define "content" }}
+<h1>Change Password</h1>
+
+<p>{{ .Msg }}</p>
+
+<form class="center" role="form" action="/user_pass" method="post">
+    <input type="password" name="old_password" class="form-control" placeholder="現在のパスワード" required autofocus>
+    <input type="password" name="new_password" class="form-control" placeholder="新しいパスワード" required>
+    <br />
+    <button class="btn btn-lg btn-primary btn-block" type="submit">更新</button>
+</form>
+
+{{ end }}

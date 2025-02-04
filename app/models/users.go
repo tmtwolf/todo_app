@@ -70,13 +70,36 @@ func (u *User) UpdateUser() (err error) {
 	return err
 }
 
-func (u *User) DeleteUser() (err error) {
-	cmd := `delete from users where id = $1`
-	_, err = Db.Exec(cmd, u.ID)
+func (u *User) UpdateUserPass() (err error) {
+	cmd := `update users set password = $1 where id = $2`
+	_, err = Db.Exec(cmd, u.Password, u.ID)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
+	return err
+}
+
+func (u *User) DeleteUser() (err error) {
+	cmd := `delete from todos where user_id = $1`
+	_, err = Db.Exec(cmd, u.ID)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+
+	cmd = `delete from sessions where user_id = $1`
+	_, err = Db.Exec(cmd, u.ID)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+
+	cmd = `delete from users where id = $1`
+	_, err = Db.Exec(cmd, u.ID)
+	if err != nil {
+		log.Println(err)
+	}
 	return err
 }
 

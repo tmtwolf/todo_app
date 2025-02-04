@@ -24,6 +24,11 @@ const (
 )
 */
 
+type HttpData struct {
+	User
+	Msg string
+}
+
 func init() {
 	connection := "postgres://neondb_owner:npg_wcYxNIqGk5l1@ep-wandering-credit-a5eruf0y-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require"
 	Db, err = sql.Open(config.Config.SQLDriver, connection)
